@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Seismic Detection of Elephant Footsteps</title>
+
+		<meta name="description" content="A presentation of the Fusion article Seismic Detection of Elephant Footsteps">
+		<meta name="author" content="Gustav Zetterqvist">
+
+		<!-- <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/myStyle.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<!-- Title-Footer plugin -->
+		<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+		<!-- Load content plugin -->
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/loadcontent/plugin.js"></script>
+		<!-- Animate plugin -->
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/animate/plugin.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js"></script>
+
+		
+	</head>
+
+	<body>
+		
+
+		<div class="reveal">
+			
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-state="no-footer">
+					<div>
+						<h2 style="position: relative; top: 190px;">Seismic Detection of <br> Elephant Footsteps</h2>
+				
+						<small style="position: relative; top: 190px;">Daniel Goderik, Albin Westlund, <strong>Gustav Zetterqvist</strong>,<br>Fredrik Gustafsson & Gustaf Hendeby</small>
+				
+						<small style="position: absolute; top: 14px; right: 45px;">Paper ID: 64</small>
+				
+						<img src="assets/logos/LiU_primary_white.png" style="height: 150px; margin: 10px auto 4rem auto; background: transparent; position: absolute; left:30px; bottom: -500px;" class="demo-logo">
+				
+						<img src="assets/logos/logo-fusion-venice.png" style="height: 200px; margin: 10px auto 4rem auto; background: transparent; position: absolute; right: 40px; bottom: -500px;" class="demo-logo">
+					</div>
+				</section>
+				
+
+				<section>
+					
+					<section>
+						<h2>Background</h2>
+						<p>
+							<ul>
+								<li>Human-Elephant conflicts are a global problem </li>
+								<li class="fragment fade-left">Harm to both people, property and crops </li>
+								<li class="fragment fade-left">Hundreds of casualties in India each year </li>
+							</ul>
+						</p>
+					</section>
+					<section data-background-video="assets/Elephant_Berserk_India_full.mp4" data-background-video-muted data-state="no-footer">
+
+					</section>
+					<section data-hide-controls="true">
+						<div style="position: relative; top: 150px;">
+							<h2>Background</h2>
+							<p>
+								<ul>
+									<li> Automated warning system</li>
+									<li class="fragment fade-left" data-fragment-index="0" style="margin-top: -5%;margin-bottom: -5%;">
+										\[ \mbox{Last year}^{\small 1}\!\!\mbox{, proof of concept}\] 
+									</li>
+									<li class="fragment fade-left" data-fragment-index="1">Now, focus on detection</li>
+								</ul>
+							</p>
+						</div>
+						<p class="fragment" data-fragment-index="0" style="font-size: x-large;position: absolute;left: 260px; top:600px;">1. Zetterqvist, et al. <em>Elephant DOA Estimation using a Geophone Network</em>. In FUSION 2023.</p>
+					</section>
+				</section>
+
+
+				<section data-background-transition="slide" data-background="assets/Elephant_intro_background.svg" data-state="no-footer"> 
+					<!-- 35px; left: 680px -->
+					<img src="assets/Elephant_intro_wave_1.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 130px; left: 580px;">
+					<img src="assets/Elephant_intro_wave_2.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 152px; left: 440px;">
+					<img src="assets/Elephant_intro_wave_3.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 173px; left: 245px;">
+					<img src="assets/Elephant_intro_arrow.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 334px; right: 550px; width: 35%;height: 35%;">
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+
+						<h2> Signal model</h2>
+	
+						<div class="r-stack">
+							<img src="assets/tikz/Signal_model_base.svg" style="width: 100%; height: 100%;">
+							<img src="assets/tikz/Signal_model_overlay_1.svg" class="fragment fade-in"style="width: 100%; height: 100%;">
+							<img src="assets/tikz/Signal_model_overlay_2.svg" class="fragment fade-in"style="width: 100%; height: 100%;">
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2> Signal model</h2>
+	
+						<div class="r-stack">
+							<img src="assets/tikz/Signal_model_base.svg"  style="width: 100%; height: 100%;">
+							<img src="assets/tikz/Signal_model_overlay_1.svg" style="width: 100%; height: 100%;">
+							<img src="assets/tikz/Signal_model_overlay_2.svg" style="width: 100%; height: 100%;">
+						</div>
+	
+						<p><span>\[ y_i(t) = \sum_n z_i^n\left(t\right) + e_i(t) \mathrm{,}\] </span> <span class="fragment">$z_i^n(t)$: $n$th event for geophone $i$ <br> $e_i(t)$: ambient noise</span></p>
+	
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>
+							Event Detection
+						</h2>
+						<ul>
+							<li>For event detection we use Kurtosis</li>
+							<li class="fragment fade-left" data-fragment-index="0">  \[Q[k] = \frac{\frac{\sum_{l=k-N+1}^{k} (\bar{y}[l]-\mu[k])^4}{N}}{\left(\frac{\sum_{l=k-N+1}^{k} (\bar{y}[l]-\mu[k])^2}{N}\right)^2}
+							\]</li>
+							<li class="fragment fade-left" data-fragment-index="0">\[ Q[k] \gt T \rightarrow \mbox{ Event}\]  </li>
+						</ul> 
+					</section>
+					
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>
+							Event Detection
+						</h2>
+						<img src="assets/tikz/event_detection.svg" style="width: 80%; height: 80%;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>
+							Event Detection
+						</h2>
+						<img src="assets/kurtosis_dark.svg" style="width: 80%; height: 80%;">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Elephant Footstep Detection</h2>
+						<img src="assets/tikz/elephant_detection.svg" alt="elephant_detection" style="width: 80%; height: 80%;">
+
+					</section>
+					<section>
+						<h2>Pre-processing</h2>
+						<ul>
+							<li>Bandpass filter between 4 and 45 Hz
+							<li>Normalization</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Signal Features</h2>
+						<ul>
+							<li>Standard deviation</li>
+							<li>Frequency peak</li>
+							<li>Spectral centroid</li>
+							<li>Frequency distribution</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<div>
+							<p data-id="animate_2">
+								<h2>Direction of Arrival Estimation</h2>
+								<p>
+									\[ \mbox{Signal model}:  z_i[k] = s\left[k - \tau_i\left(\phi[k]\right)\right] + e_i[k] \] 
+								</p>
+							</p>
+						</div>
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<div>
+							<p data-id="animate_2">
+								<h2>Direction of Arrival Estimation</h2>
+
+								<p style="opacity: 0.5;">
+									\[ \mbox{Signal model}:  z_i[k] = s\left[k - \tau_i\left(\phi[k]\right)\right] + e_i[k] \] 
+								</p>
+							</p>
+
+							<p>
+								Delay-and-Sum Beamformer:
+								\[ \hat{\phi}[k] = \arg\max_{\phi} \sum_{k=1}^N \left| \frac{1}{M} \sum_{i=1}^{M} z_i[k+\tau_i(\phi)] \right|^2 \]
+							</p>
+						</div>
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<div>
+							<p data-id="animate_2">
+								<h2>Direction of Arrival Estimation</h2>
+							</p>
+							
+							<div class="r-stack">
+								<p style="width: 70%;" class="fragment fade-out" data-fragment-index="1">
+									<img src="assets/DelayAndSumVisualize_1.svg" alt="DelayAndSumVisualize_1">
+
+								</p>
+								<p style="width: 70%;" class="fragment fade-in" data-fragment-index="1">
+									<img src="assets/DelayAndSumVisualize_2.svg" alt="DelayAndSumVisualize_2">
+								</p>
+								<p class="fragment fade-in" data-fragment-index="2" style="width: 70%;">
+									<video data-autoplay loop src="assets/DelayAndSumVisualizeDark.mp4"></video>
+								</p>
+							</div>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>Experimental setup</h2>
+						<div>
+							<img src="assets/hardware.svg" alt="experimental_setup" style="height: 400px;">
+							<img src="assets/Hardware_setup_dark.svg" alt="experimental_setup" style="height: 300px; position: relative; top: -50px;">
+						</div>
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>Experimental setup</h2>
+						<img src="assets/Elephant_drone_shot.png" alt="experimental_setup" style="height: 500px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>Data collection</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Animal</th>
+									<th>Kolmården</th>
+									<th>Kenya</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Elephant</td>
+									<td style="text-align: center;">Asian</td>
+									<td style="text-align: center;">African</td>
+								</tr>
+								<tr>
+									<td>Human</td>
+									<td style="text-align: center;"><g style="color: green;">✓</g></td>								
+									<td style="text-align: center;"><g style="color: green;">✓</g></td>
+								</tr>
+								<tr>
+									<td>Rihno</td>
+									<td style="text-align: center;"><g style="color: green;">✓</g></td>								<td style="text-align: center;">-</td>
+								</tr>
+								<tr>
+									<td>Kulan</td>
+									<td style="text-align: center;"><g style="color: green;">✓</g></td>
+									<td style="text-align: center;">-</td>
+								</tr>
+								<tr>
+									<td>Camel</td>
+									<td style="text-align: center;"><g style="color: green;">✓</g></td>								<td style="text-align: center;">-</td>
+								</tr>
+								<tr>
+									<td>Buffalo</td>
+									<td style="text-align: center;">-</td>
+									<td style="text-align: center;"><g style="color: green;">✓</g></td>							
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>Signal Frequency</h2>
+						<img src="assets/FFT_comp_log_dark.svg" alt="FFT_kolmården" style="height: 400px;">
+						<img src="assets/FFT_comp_Kenya_log_dark.svg" alt="FFT_kenya" style="height: 100px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<h2>Signal Frequency</h2>
+						<img src="assets/FFT_comp_log_dark.svg" alt="FFT_kolmården" style="height: 100px;">
+						<img src="assets/FFT_comp_Kenya_log_dark.svg" alt="FFT_kenya" style="height: 400px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<div>
+						<h2>Signal Features</h2>
+							<table>
+								<thead>
+									<tr>
+										<th></th>
+										<th colspan="2" data-id="animate_3">Kolmården</th>
+									</tr>
+									<tr>
+										<th  data-id="animate_4">Feature</th>
+										<th  data-id="animate_5">Mean</th>
+										<th  data-id="animate_6"> σ</th>								
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td data-id="animate_7">Standard Deviation</td>
+										<td data-id="animate_8">0.08821</td>
+										<td data-id="animate_9">6.5e-4</td>
+									</tr>
+									<tr>
+										<td data-id="animate_10"> Frequency peak</td>
+										<td data-id="animate_11">13.2</td>
+										<td data-id="animate_12">3.72</td>
+									</tr>
+									<tr>
+										<td data-id="animate_13">Spectral Centroid</td>
+										<td data-id="animate_14">19.1</td>
+										<td data-id="animate_15">3.62</td>
+									</tr>
+									<tr>
+										<td data-id="animate_16">Frequency Ratio</td>
+										<td data-id="animate_17">603.1</td>
+										<td data-id="animate_18">478.9</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<div>
+						<h2>Signal Features</h2>
+							<table>
+								<thead>
+									<tr>
+										<th></th>
+										<th colspan="2" data-id="animate_3">Kolmården</th>
+										<th colspan="2">Kenya</th>
+									</tr>
+									<tr>
+										<th data-id="animate_4">Feature</th>
+										<th data-id="animate_5">Mean</th>
+										<th data-id="animate_6"> σ</th>
+										<th>Mean</th>
+										<th> σ</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td data-id="animate_7">Standard Deviation</td>
+										<td data-id="animate_8">0.08821</td>
+										<td data-id="animate_9">6.5e-4</td>
+										<td>0.08812</td>
+										<td>9.3e-4</td>
+									</tr>
+									<tr>
+										<td data-id="animate_10">Frequency peak</td>
+										<td data-id="animate_11">13.2</td>
+										<td data-id="animate_12">3.72</td>
+										<td>12.9</td>
+										<td>3.15</td>
+									</tr>
+									<tr>
+										<td data-id="animate_13">Spectral Centroid</td>
+										<td data-id="animate_14">19.1</td>
+										<td data-id="animate_15">3.62</td>
+										<td>18.3</td>
+										<td>3.53</td>
+									</tr>
+									<tr>
+										<td data-id="animate_16">Frequency Ratio</td>
+										<td data-id="animate_17">603.1</td>
+										<td data-id="animate_18">478.9</td>
+										<td>48.1</td>
+										<td>27.4</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<div>
+							<h2 data-id="animate_20">Detection Results</h2>
+							<!-- <p>
+								\[ \begin{align}
+								\mbox{Accuracy} &= \frac{\mbox{TP}+\mbox{TN}}{\mbox{TP}+\mbox{TN}+\mbox{FP}+\mbox{FN}} \\
+								\mbox{Recall} &= \frac{\mbox{TP}}{\mbox{TP}+\mbox{FN}} \\
+								\mbox{Precision} &= \frac{\mbox{TP}}{\mbox{TP}+\mbox{FP}} \\
+								\mbox{F1 score} &= 2 \cdot \frac{\mbox{Precision} \cdot \mbox{Recall}}{\mbox{Precision} + \mbox{Recall}}
+							\end{align} \]
+							</p> -->
+							<ul>
+								<li><b>Accuracy</b>: Proportion of correct predictions </li>
+								<li class="fragment fade-left"><b>Recall</b>: Proportion of actual positives correctly predicted
+								<li class="fragment fade-left"><b>Precision</b>:  Proportion of predicted positives that are correct</li>
+								<li class="fragment fade-left"><b>F1 score</b>: Harmonic mean of precision and recall</li>
+							</ul>
+						</div> 
+					</section>
+
+					<section data-visibility="hidden">
+						<div>
+						<h2>Detection Results</h2>
+							<table>
+								<caption>Kolmården Wildlife Park (1σ / 1.5σ / 2σ)</caption>
+								<thead>
+									<tr>
+										<th>Animal</th>
+										<th>TP</th>
+										<th>TN</th>
+										<th>FP</th>
+										<th>FN</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Elephant</td>
+										<td>17 / 31 / 35</td>
+										<td>0 / 0 / 0</td>
+										<td>0 / 1 / 1</td>
+										<td>40 / 26 / 22</td>
+									</tr>
+									<tr>
+										<td>Human</td>
+										<td>0 / 0 / 0</td>
+										<td>57 / 57 / 54</td>
+										<td>0 / 0 / 3</td>
+										<td>0 / 0 / 0</td>
+									</tr>
+									<tr>
+										<td>Rhino</td>
+										<td>0 / 0 / 0</td>
+										<td>57 / 54 / 53</td>
+										<td>0 / 3 / 4</td>
+										<td>0 / 0 / 0</td>
+									</tr>
+									<tr>
+										<td>Camel</td>
+										<td>0 / 0 / 0</td>
+										<td>57 / 57 / 57</td>
+										<td>0 / 0 / 0</td>
+										<td>0 / 0 / 0</td>
+									</tr>
+									<tr>
+										<td>Kulan</td>
+										<td>0 / 0 / 0</td>
+										<td>49 / 49 / 49</td>
+										<td>0 / 0 / 0</td>
+										<td>0 / 0 / 0</td>
+									</tr>
+									<tr>
+										<td class="highlight">Total</td>
+										<td>17 / 31 / <span class="highlight">35</span></td>
+										<td><span class="highlight">220</span> / 217 / 213</td>
+										<td><span class="highlight">0</span> / 4 / 8</td>
+										<td>40 / 26 / <span class="highlight">22</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="fade">
+						<div>
+						<h2 data-id="animate_20">Detection Results</h2>
+							<table>
+								<caption>Evaluation scores from Kolmården Wildlife Park.</caption>
+								<thead>
+									<tr>
+										<th>±σ(s)</th>
+										<th>Accuracy</th>
+										<th>Recall</th>
+										<th>Precision</th>
+										<th>F1 score</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>0.86</td>
+										<td>0.30</td>
+										<td><b style="color: green;">1</b></td>
+										<td>0.46</td>
+									</tr>
+									<tr>
+										<td>1.5</td>
+										<td><b style="color: green;">0.89</b></td>
+										<td>0.54</td>
+										<td>0.89</td>
+										<td>0.67</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td><b style="color: green;">0.89</b></td>
+										<td><b style="color: green;">0.61</b></td>
+										<td>0.81</td>
+										<td><b style="color: green;">0.7</b></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+					<section data-state="no-footer">
+						<div>
+						<h2>Comparison</h2>
+							<table>
+								<thead>
+									<tr>
+										<th></th>
+										<th colspan="4" style="text-align: center;"><strong>Proposed algorithm</strong></th>
+										<th colspan="4" style="text-align: center;"><strong>Last year</strong></th>
+									</tr>
+									<tr>
+										<th>Animal</th>
+										<th>TP</th>
+										<th>TN</th>
+										<th>FP</th>
+										<th>FN</th>
+										<th>TP</th>
+										<th>TN</th>
+										<th>FP</th>
+										<th>FN</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Elephant</td>
+										<td>8</td>
+										<td>0</td>
+										<td>1</td>
+										<td>2</td>
+										<td>10</td>
+										<td>0</td>
+										<td>8</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>Human</td>
+										<td>0</td>
+										<td>10</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>9</td>
+										<td>1</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>Rhino</td>
+										<td>0</td>
+										<td>10</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>9</td>
+										<td>1</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>Camel</td>
+										<td>0</td>
+										<td>10</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>10</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>Kulan</td>
+										<td>0</td>
+										<td>10</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>10</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td><b>Total</b></td>
+										<td>8</td>
+										<td ><b style="color: green;">40</b></td>
+										<td><b style="color: green;">1</b></td>
+										<td>2</td>
+										<td><b style="color: green;">10</b></td>
+										<td>38</td>
+										<td>10</td>
+										<td><b style="color: green;">0</b></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+				</section>
+					
+				<section>
+					<h2>DOA Results</h2>
+					<img src="assets/DOA_dark.svg" alt="DOA" style="height: 500px;">
+				</section>
+
+				<section data-auto-animate >
+					<h2>Conclusions</h2>
+					<ul>
+						<li>Proposed algorithm reduces false alarms</li>
+						<li class="fragment fade-left">High accuracy for elephant detection</li>
+						<li class="fragment fade-left">Direction of arrival estimation is accurate</li>
+					</ul>
+				</section>
+
+				<section data-auto-animate  data-state="no-footer">			
+					<div>
+						<h1 style="position: relative; top: 190px;">Thank you!</h1>
+				
+						<img src="assets/logos/LiU_primary_white.png" style="height: 150px; margin: 10px auto 4rem auto; background: transparent; position: absolute; left:30px; bottom: -560px;" class="demo-logo">
+				
+						<img src="assets/logos/logo-fusion-venice.png" style="height: 200px; margin: 10px auto 4rem auto; background: transparent; position: absolute; right: 40px; bottom: -550px;" class="demo-logo">
+					</div>
+				</section>
+
+
+				<section data-visibility="hidden">
+					<h2>Hidden Slides</h2>
+					<p>
+						This slide is visible in the source, but hidden when the presentation is viewed. You can show all hidden slides by setting the `showHiddenSlides` config option to `true`.
+					</p>
+				</section>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1280,
+  				height: 720,
+				// Factor of the display size that should remain empty around
+  				// the content
+		  		margin: 0,
+				
+				showHiddenSlides: false,
+
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				animate: {
+	  				autoplay: true // default is false
+					},	
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.MathJax2,RevealLoadContent, RevealAnimate],
+				dependencies:
+				[
+					{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function() { footer_js.initialize(); } }
+				]
+			});
+
+			// Custom function to hide controls on slides with data-hide-controls="true"
+			Reveal.addEventListener('slidechanged', function(event) {
+            var currentSlide = event.currentSlide;
+            if (currentSlide.hasAttribute('data-hide-controls')) {
+                document.querySelector('.reveal').classList.add('no-controls');
+            } else {
+                document.querySelector('.reveal').classList.remove('no-controls');
+            }
+        	});
+
+		</script>
+
+		<style>
+			.reveal.no-controls .controls {
+				opacity: 0;
+			}
+		</style>
+	</body>
+</html>
